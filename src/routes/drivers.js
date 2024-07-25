@@ -32,7 +32,6 @@ routerDrivers.post("/postDrivers", async (req, res) => {
     const newDriver = {
         id: await idGenerator(),
         name: req.body.name,
-        location: req.body.location,
     };
 
     drivers.push(newDriver);
@@ -72,7 +71,6 @@ routerDrivers.put("/:id", async (req, res) => {
     const updateDriver = {
         ...drivers[indexDriver],
         name: req.body.name,
-        location: req.body.location,
     }
 
     drivers[indexDriver] = updateDriver;

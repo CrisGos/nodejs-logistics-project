@@ -31,8 +31,9 @@ routerShipments.post("/postShipments", async (req, res) => {
     const shipments = await readShipmentsFs();
     const newShipment = {
         id: await idGenerator(),
-        name: req.body.name,
-        location: req.body.location,
+        item: req.body.item,
+        quantity: req.body.quantity,
+        warehouseId: req.body.warehouseId,
     };
 
     shipments.push(newShipment);
@@ -71,8 +72,9 @@ routerShipments.put("/:id", async (req, res) => {
     if (indexShipment === -1) return res.status(404).send('Shipment not found');
     const updateShipment = {
         ...shipments[indexShipment],
-        name: req.body.name,
-        location: req.body.location,
+        item: req.body.item,
+        quantity: req.body.quantity,
+        warehouseId: req.body.warehouseId,
     }
 
     shipments[indexShipment] = updateShipment;
