@@ -11,7 +11,7 @@ const readDriversFs = async () => {
         const drivers = await fs.readFile(driversFilePath)
         return JSON.parse(drivers);
     } catch (err) {
-        throw new Error(`Surgió un error en la promesa ${err}`)
+        throw new Error(`Something went wrong in the promise ${err}`)
     }
 }
 
