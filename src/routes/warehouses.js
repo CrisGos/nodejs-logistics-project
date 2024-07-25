@@ -38,6 +38,8 @@ routerWarehouses.post("/postWarehouses", async (req, res) => {
         location: req.body.location,
     };
 
+    if (!req.body.name || !req.body.location) return res.status(400).json({error: "Bad request: 'name' and 'location' are required"});
+
     warehouses.push(newWarehouse);
     const response = {
         message: "Warehouse created successfully",
@@ -77,6 +79,8 @@ routerWarehouses.put("/:id", async (req, res) => {
         name: req.body.name,
         location: req.body.location,
     }
+
+    if (!req.body.name || !req.body.location) return res.status(400).json({error: "Bad request: 'name' and 'location' are required"});
 
     warehouses[indexWarehouse] = updateWarehouse;
     await writeWarehousesFs(warehouses);

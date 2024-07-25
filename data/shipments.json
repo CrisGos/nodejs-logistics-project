@@ -1,1 +1,38 @@
-[]
+[
+  {
+    "id": 1,
+    "item": "iphone",
+    "warehouseId": 2,
+    "quantity": 80
+  },
+  {
+    "id": 2,
+    "item": "headphones",
+    "quantity": 70,
+    "warehouseId": 3
+  },
+  {
+    "id": 3,
+    "item": "headphones",
+    "quantity": 70,
+    "warehouseId": 3
+  },
+  {
+    "id": 4,
+    "item": "headphones",
+    "quantity": 70,
+    "warehouseId": 3
+  },
+  {
+    "id": 5,
+    "item": "headphones",
+    "quantity": 70,
+    "warehouseId": 3
+  },
+  {
+    "id": 6,
+    "item": "headphones",
+    "quantity": 70,
+    "warehouseId": 2
+  }
+]

@@ -29,12 +29,16 @@ const idGenerator = async () => {
 
 routerShipments.post("/postShipments", async (req, res) => {
     const shipments = await readShipmentsFs();
+    const foundWarehouse = await fetch(`http://localhost:3010/warehouses/${req.body.warehouseId}`)
     const newShipment = {
         id: await idGenerator(),
         item: req.body.item,
         quantity: req.body.quantity,
         warehouseId: req.body.warehouseId,
     };
+
+    if (!foundWarehouse.ok) return res.status(404).json({error: "Bad request: warehouseId does not exist"});
+    if (!req.body.item || !req.body.quantity) return res.status(400).json({error: "Bad request: 'item' and 'quantity' are required"});
 
     shipments.push(newShipment);
     const response = {
@@ -69,6 +73,7 @@ routerShipments.get("/:shipmentId", async (req, res) => {
 routerShipments.put("/:id", async (req, res) => {
     const shipments = await readShipmentsFs();
     const indexShipment = shipments.findIndex(shipment => shipment.id === parseInt(req.params.id));
+    const foundWarehouse = await fetch(`http://localhost:3010/warehouses/${req.body.warehouseId}`)
     if (indexShipment === -1) return res.status(404).send('Shipment not found');
     const updateShipment = {
         ...shipments[indexShipment],
@@ -76,6 +81,8 @@ routerShipments.put("/:id", async (req, res) => {
         quantity: req.body.quantity,
         warehouseId: req.body.warehouseId,
     }
+    if (!foundWarehouse.ok) return res.status(404).json({error: "Bad request: warehouseId does not exist"});
+    if (!req.body.item || !req.body.quantity) return res.status(400).json({error: "Bad request: 'item' and 'quantity' are required"});
 
     shipments[indexShipment] = updateShipment;
     await writeShipmentsFs(shipments);

@@ -34,6 +34,8 @@ routerDrivers.post("/postDrivers", async (req, res) => {
         name: req.body.name,
     };
 
+    if (!req.body.name) return res.status(400).json({error: "Bad request: 'name' is required"});
+
     drivers.push(newDriver);
     const response = {
         message: "Driver created successfully",
@@ -72,6 +74,8 @@ routerDrivers.put("/:id", async (req, res) => {
         ...drivers[indexDriver],
         name: req.body.name,
     }
+
+    if (!req.body.name) return res.status(400).json({error: "Bad request: 'name' is required"});
 
     drivers[indexDriver] = updateDriver;
     await writeDriversFs(drivers);
