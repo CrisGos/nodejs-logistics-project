@@ -42,8 +42,8 @@ export const updateWarehouse = async (id, newWarehouse) => {
         const warehouseUpdated = await findById(id);
         return [resolve, warehouseUpdated];
 
-    }catch(err){
-        throw new Error("Warehouse has not been updated", err )
+    }catch(error){
+        throw new Error("Warehouse has not been updated", error)
     }
 };
 
